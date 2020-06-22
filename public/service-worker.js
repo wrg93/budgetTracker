@@ -1,6 +1,6 @@
 console.log("Hello from your service worker!");
 
-const FILES_TO_CHANGE = [
+const FILES_TO_CACHE = [
     "/",
     "./index.html",
     "./manifet.webmanifest",
@@ -16,7 +16,7 @@ const DATA_CACHE_NAME = "data-cache-v2";
 
 //install
 self.addEventListener("install", function (evt) {
-    evt.waitUnril(
+    evt.waitUntil(
         caches.open(CACHE_NAME).then((cache) => {
             console.log("Your files were pre-cached successfully");
             return cache.addAll(FILES_TO_CACHE);
@@ -41,7 +41,7 @@ self.addEventListener("activate", function (evt) {
         })
     );
 
-    self.ClientRectList.claim();
+    self.clients.claim();
 });
 
 //fetch
